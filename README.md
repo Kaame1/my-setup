@@ -22,7 +22,7 @@ SSH-ключ, привязанный к аккаунту GitHub.
 
 ```bash
 # 1. сгенерировать ключ (ed25519); на все вопросы можно жать Enter
-ssh-keygen -t ed25519 -C "aram.matosyan@aerodynamics.am"
+ssh-keygen -t ed25519 -C "your mail like a.b@gmail.com"
 
 # 2. запустить ssh-agent и добавить ключ
 eval "$(ssh-agent -s)"
