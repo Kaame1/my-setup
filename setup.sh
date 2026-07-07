@@ -104,17 +104,40 @@ install_packages() {
 }
 
 # =============================================================================
-#  3. Neovim (recent release — the config needs 0.10+)
+#  3. Neovim  (the config uses vim.lsp.config / vim.lsp.enable — needs 0.11+)
+#     Installed from the official release tarball into /opt (not apt, which
+#     ships an old version). Skipped only if a >= 0.11 nvim is already present.
 # =============================================================================
 install_neovim() {
   if command -v nvim >/dev/null 2>&1; then
-    info "Neovim already present: $(nvim --version | head -1)"
-    return
+    local ver major minor
+    ver="$(nvim --version | head -1 | grep -oE '[0-9]+\.[0-9]+' | head -1)"
+    major="${ver%%.*}"; minor="${ver##*.}"
+    if [ "${major:-0}" -gt 0 ] || [ "${minor:-0}" -ge 11 ]; then
+      info "Neovim $ver already present (>= 0.11) — skipping."
+      return
+    fi
+    warn "Neovim $ver is too old (config needs 0.11+); replacing it."
+    sudo apt-get remove -y neovim neovim-runtime >/dev/null 2>&1 || true
   fi
-  info "Installing Neovim from the stable PPA…"
-  sudo add-apt-repository -y ppa:neovim-ppa/stable
-  sudo apt-get update -y
-  sudo apt-get install -y neovim
+
+  local arch asset
+  case "$(uname -m)" in
+    x86_64)        arch="x86_64" ;;
+    aarch64|arm64) arch="arm64" ;;
+    *) warn "Unsupported arch $(uname -m) — install Neovim 0.11+ manually."; return ;;
+  esac
+  asset="nvim-linux-${arch}.tar.gz"
+
+  info "Installing latest Neovim from the official release ($asset)…"
+  local tmp; tmp="$(mktemp -d)"
+  curl -fsSL -o "$tmp/$asset" \
+    "https://github.com/neovim/neovim/releases/latest/download/$asset"
+  sudo rm -rf "/opt/nvim-linux-${arch}"
+  sudo tar -C /opt -xzf "$tmp/$asset"
+  sudo ln -sf "/opt/nvim-linux-${arch}/bin/nvim" /usr/local/bin/nvim
+  rm -rf "$tmp"
+  ok "Neovim installed: $(nvim --version | head -1)"
 }
 
 # =============================================================================
