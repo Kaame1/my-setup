@@ -15,6 +15,41 @@
 
 В каждой папке есть свой README с быстрым гайдом и горячими клавишами.
 
+## Настройка SSH-ключа для GitHub
+
+Клонирование идёт по SSH (`git@github.com:...`), поэтому сначала нужен
+SSH-ключ, привязанный к аккаунту GitHub.
+
+```bash
+# 1. сгенерировать ключ (ed25519); на все вопросы можно жать Enter
+ssh-keygen -t ed25519 -C "aram.matosyan@aerodynamics.am"
+
+# 2. запустить ssh-agent и добавить ключ
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+
+# 3. вывести ПУБЛИЧНЫЙ ключ и скопировать его целиком
+cat ~/.ssh/id_ed25519.pub
+```
+
+Затем добавить ключ на GitHub:
+
+1. Открыть **[github.com/settings/keys](https://github.com/settings/keys)**
+   (или *Settings → SSH and GPG keys*).
+2. Нажать **New SSH key**.
+3. **Title** — любое имя (например «laptop-ubuntu»), **Key type** — `Authentication`.
+4. Вставить содержимое `id_ed25519.pub` в поле **Key** и нажать **Add SSH key**.
+
+Проверить, что всё работает:
+
+```bash
+ssh -T git@github.com
+# ожидаемо: "Hi <username>! You've successfully authenticated..."
+```
+
+> ⚠️ Публичный (`.pub`) ключ добавляем на GitHub. Приватный (`~/.ssh/id_ed25519`)
+> **никому не показываем и не коммитим**.
+
 ## Как поднять новый ноутбук на Ubuntu
 
 ```bash
