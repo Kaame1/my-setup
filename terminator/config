@@ -1,0 +1,120 @@
+[global_config]
+  handle_size = 3
+  window_state = normal
+  tab_position = top
+  scroll_tabbar = True
+  homogeneous_tabbar = True
+  title_hide_sizetext = True
+  title_transmit_fg_color = "#d5c4a1"
+  title_transmit_bg_color = "#282828"
+  title_receive_fg_color = "#928374"
+  title_receive_bg_color = "#1d2021"
+  title_inactive_fg_color = "#665c54"
+  title_inactive_bg_color = "#1d2021"
+  inactive_color_offset = 0.8
+  enabled_plugins = LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler
+  suppress_multiple_term_dialog = True
+  always_split_with_profile = True
+  title_use_system_font = False
+  title_font = Monospace 9
+
+[keybindings]
+  zoom_in = <Control>equal
+  zoom_out = <Control>minus
+  zoom_normal = <Control>0
+  split_horiz = <Control><Shift>o
+  split_vert = <Control><Shift>e
+  close_term = <Control><Shift>w
+  close_window = <Control><Shift>q
+  new_tab = <Control><Shift>t
+  go_up = <Alt>Up
+  go_down = <Alt>Down
+  go_left = <Alt>Left
+  go_right = <Alt>Right
+  resize_up = <Control><Alt>Up
+  resize_down = <Control><Alt>Down
+  resize_left = <Control><Alt>Left
+  resize_right = <Control><Alt>Right
+  next_tab = <Control><Shift>n
+  prev_tab = <Control><Shift>m
+  switch_to_tab_1 = <Alt>1
+  switch_to_tab_2 = <Alt>2
+  switch_to_tab_3 = <Alt>3
+  switch_to_tab_4 = <Alt>4
+  switch_to_tab_5 = <Alt>5
+  copy = <Control><Shift>c
+  paste = <Control><Shift>v
+  search = <Control><Shift>f
+  toggle_zoom = <Control><Shift>z
+  scaled_zoom = <Control><Shift>x
+  full_screen = F11
+  reset = <Control><Shift>r
+  reset_clear = <Control><Shift>g
+  group_all = <Super>g
+  ungroup_all = <Super><Shift>g
+  layout_launcher = <Alt>l
+
+[profiles]
+  [[default]]
+    background_darkness = 0.98
+    background_type = transparent
+    cursor_shape = block
+    cursor_blink = True
+    cursor_fg_color = "#282828"
+    cursor_bg_color = "#ebdbb2"
+    font = Monospace 13
+    use_system_font = False
+    foreground_color = "#ebdbb2"
+    background_color = "#282828"
+    show_titlebar = False
+    scrollbar_position = right
+    scrollback_lines = 10000
+    scrollback_infinite = True
+    scroll_on_output = False
+    scroll_on_keystroke = True
+    copy_on_selection = True
+    palette = "#282828:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#a89984:#928374:#fb4934:#b8bb26:#fabd2f:#83a598:#d3869b:#8ec07c:#ebdbb2"
+    word_chars = "-A-Za-z0-9,./?%&#_~:+"
+    use_theme_colors = False
+    bold_is_bright = True
+    login_shell = True
+    use_custom_command = True
+    custom_command = /usr/bin/fish
+  [[claude]]
+    background_darkness = 0.98
+    background_type = transparent
+    cursor_shape = block
+    cursor_blink = True
+    cursor_fg_color = "#FDF5E3"
+    cursor_bg_color = "#3c3836"
+    font = Monospace 13
+    use_system_font = False
+    foreground_color = "#3c3836"
+    background_color = "#FDF5E3"
+    show_titlebar = False
+    scrollbar_position = right
+    scrollback_lines = 10000
+    scrollback_infinite = True
+    scroll_on_output = False
+    scroll_on_keystroke = True
+    copy_on_selection = True
+    palette = "#282828:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#a89984:#928374:#fb4934:#b8bb26:#fabd2f:#83a598:#d3869b:#8ec07c:#ebdbb2"
+    word_chars = "-A-Za-z0-9,./?%&#_~:+"
+    use_theme_colors = False
+    bold_is_bright = True
+    login_shell = True
+    use_custom_command = True
+    custom_command = /home/arammatosyan/.claude/run-claude
+
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+      size = 1200, 700
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+
+[plugins]

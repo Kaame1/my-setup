@@ -1,0 +1,7 @@
+# backups created by setup.sh
+*.bak-*
+
+# editor / OS junk
+*.swp
+*~
+.DS_Store

@@ -1,0 +1,13 @@
+#!/usr/bin/env fish
+# Launcher used by the Terminator "claude" profile / window.
+# Runs the real Claude Code binary with a light theme (matches the cream background)
+# and keeps the window open if Claude exits with an error, so the message stays visible.
+
+/home/arammatosyan/.local/bin/claude --settings '{"theme":"light"}' $argv
+set -l ret $status
+
+if test $ret -ne 0
+    echo
+    echo "── Claude Code exited with status $ret ──"
+    read -P "Press Enter to close this window... "
+end

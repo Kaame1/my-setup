@@ -1,0 +1,9 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "bash /home/arammatosyan/.claude/statusline.sh"
+  },
+  "effortLevel": "xhigh",
+  "theme": "dark",
+  "model": "opus[1m]"
+}
