@@ -18,9 +18,16 @@ return {
                 -- tsx, jsx, html , svelte comment support
                 options = {
                     custom_commentstring = function()
-                        return require('ts_context_commentstring.internal').calculate_commentstring({ key =
-                            'commentstring' })
-                            or vim.bo.commentstring
+                        -- pcall: the plugin errors when the buffer has no treesitter parser
+                        local ok, result = pcall(function()
+                            return require('ts_context_commentstring.internal').calculate_commentstring({
+                                key = 'commentstring',
+                            })
+                        end)
+                        if ok and result then
+                            return result
+                        end
+                        return vim.bo.commentstring
                     end,
                 },
             }
